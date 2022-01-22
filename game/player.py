@@ -12,4 +12,4 @@ class Player:
     def guess(self):
 
         x = "variable just so the program doesn't think there's an error with the function"
-        y = "Matias, you can erase these both (x and y), and finish the function"
+        y = "Matias, you can erase these both (x and y), and finish the function."
