@@ -18,11 +18,12 @@ class Director:
         while self.is_playing:
             get_bet()
             display_next_card()
-            display_result()
+            display_result() 
 
 
     def get_bet(self):
 
+ #Test change
         """
         Displays card's current number and aks
         for the player's bet for the next card
