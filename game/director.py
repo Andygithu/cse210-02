@@ -34,7 +34,7 @@ class Director:
         
         self.card.shuffle()
         self.card_number = self.card.display()
-        print(f"The card is: {self.card_number}")
+        print(f"\nThe card is: {self.card_number}")
 
         player_bet = Player()
         self.bet = player_bet.guess()
@@ -47,16 +47,18 @@ class Director:
         """
         self.next_card.shuffle()
         self.next_card_number = self.next_card.display()
-        print(f"Next card was: {self.next_card_number}")
 
 
         higher = None
         lower = None
+        equal = None
 
         if self.next_card_number > self.card_number:
             higher = True
         elif self.next_card_number < self.card_number:
             lower = True
+        elif self.next_card_number == self.card_number:
+            equal = True
 
         if self.bet == "h" and higher == True:
             #self.round_score = 100
@@ -70,21 +72,28 @@ class Director:
         elif self.bet == "l" and higher == True:
             self.score -= 75
             #self.round_score = -75
+        elif equal:
+            print("No points added or lost. Cards were the same.")
         else:
-            print("invalid input")
+            print("Invalid input. No points added or lost.")
         
         if self.score <= 0:
             print("You've ran our of points.")
             print("Game over.")
             self.is_playing = False
 
+        if self.is_playing:
+            print(f"Next card was: {self.next_card_number}")
+
         #self.total_score += self.round_score
         
 
     def display_result(self):
 
-        print(f"Your score is: {self.score}")
-        #play_again = input("")
-        player_bet = Player()
-        player_bet.guess
-        
+        if self.is_playing:
+
+            print(f"Your score is: {self.score}")
+            play_again = input("Play again? [y/n] ")
+            play_again = play_again.lower() == "y"
+
+            self.is_playing = play_again
