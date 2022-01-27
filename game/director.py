@@ -7,18 +7,21 @@ class Director:
     def __init__(self):
 
         self.card = Card()
-        self.bet = None
+        self.card_number = 0
+        self.bet = ""
         self.next_card = Card()
-        self.score = 0
+        self.next_card_number = 0
+        self.score = Player().score
+        self.round_score = 0
         self.total_score = 0
         self.is_playing = True
 
     def start_game(self):
 
         while self.is_playing:
-            get_bet()
-            display_next_card()
-            display_result() 
+            self.get_bet()
+            self.display_next_card()
+            self.display_result() 
 
 
     def get_bet(self):
@@ -28,13 +31,13 @@ class Director:
         Displays card's current number and aks
         for the player's bet for the next card
         """
-            
-        card = self.card.shuffle()
-        print(f"The card is: {card}")
-        self.card = card
+        
+        self.card.shuffle()
+        self.card_number = self.card.display()
+        print(f"The card is: {self.card_number}")
 
-        player_bet = Player.guess()
-        self.bet = player_bet
+        player_bet = Player()
+        self.bet = player_bet.guess()
 
     def display_next_card(self):
 
@@ -42,28 +45,38 @@ class Director:
         Display next card's number and define it this
         number was higher or lower than player's bet
         """
+        self.next_card.shuffle()
+        self.next_card_number = self.next_card.display()
+        print(f"Next card was: {self.next_card_number}")
 
-        next_card = self.next_card.shuffle()
-        print(f"Next card was: {next_card}")
 
-        higher = next_card > self.card
-        lower = next_card < self.card
+        higher = None
+        lower = None
 
-        if self.bet == "h" and higher:
-            self.score = 100
-        elif self.bet == "l" and lower:
-            self.score = 100
-        elif self.bet == "h" and lower:
-            self.score -= 75
-        elif self.bet == "l" and higher:
-            self.score -= 75
+        if self.next_card_number > self.card_number:
+            higher = True
+        elif self.next_card_number < self.card_number:
+            lower = True
+
+        if self.bet == "h" and higher == True:
+            self.round_score = 100
+        elif self.bet == "l" and lower == True:
+            self.round_score = 100
+        elif self.bet == "h" and lower == True:
+            self.round_score = 75
+        elif self.bet == "l" and higher == True:
+            self.round_score = 75
         
         if self.score <= 0:
             print("You've ran our of points.")
             print("Game over.")
             self.is_playing = False
 
-        self.total_score += self.score
+        self.total_score += self.round_score
         
-    
+
     def display_result(self):
+
+        print(f"Your score is: {self.total_score}")
+        play_again = input("")
+        
