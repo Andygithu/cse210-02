@@ -12,8 +12,8 @@ class Director:
         self.next_card = Card()
         self.next_card_number = 0
         self.score = Player().score
-        self.round_score = 0
-        self.total_score = 0
+        #self.round_score = 0
+        #self.total_score = 0
         self.is_playing = True
 
     def start_game(self):
@@ -59,24 +59,32 @@ class Director:
             lower = True
 
         if self.bet == "h" and higher == True:
-            self.round_score = 100
+            #self.round_score = 100
+            self.score += 100
         elif self.bet == "l" and lower == True:
-            self.round_score = 100
+            self.score += 100
+            #self.round_score = 100
         elif self.bet == "h" and lower == True:
-            self.round_score = 75
+            self.score -= 75
+            #self.round_score = -75
         elif self.bet == "l" and higher == True:
-            self.round_score = 75
+            self.score -= 75
+            #self.round_score = -75
+        else:
+            print("invalid input")
         
         if self.score <= 0:
             print("You've ran our of points.")
             print("Game over.")
             self.is_playing = False
 
-        self.total_score += self.round_score
+        #self.total_score += self.round_score
         
 
     def display_result(self):
 
-        print(f"Your score is: {self.total_score}")
-        play_again = input("")
+        print(f"Your score is: {self.score}")
+        #play_again = input("")
+        player_bet = Player()
+        player_bet.guess
         

@@ -13,3 +13,4 @@ class Player:
 
         guess = input("Higher or lower? [h/l] ")
         self.bet = guess
+        return self.bet
