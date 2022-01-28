@@ -20,7 +20,7 @@ class Card:
     
     def shuffle(self):
 
-        number = random.randint(1, 14)
+        number = random.randint(1, 13)
         self.card_number = number
 
     def display(self):
