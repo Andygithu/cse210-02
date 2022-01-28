@@ -12,8 +12,6 @@ class Director:
         self.next_card = Card()
         self.next_card_number = 0
         self.score = Player().score
-        #self.round_score = 0
-        #self.total_score = 0
         self.is_playing = True
 
     def start_game(self):
@@ -61,17 +59,13 @@ class Director:
             equal = True
 
         if self.bet == "h" and higher == True:
-            #self.round_score = 100
             self.score += 100
         elif self.bet == "l" and lower == True:
             self.score += 100
-            #self.round_score = 100
         elif self.bet == "h" and lower == True:
             self.score -= 75
-            #self.round_score = -75
         elif self.bet == "l" and higher == True:
             self.score -= 75
-            #self.round_score = -75
         elif equal:
             print("No points added or lost. Cards were the same.")
         else:
@@ -85,8 +79,6 @@ class Director:
         if self.is_playing:
             print(f"Next card was: {self.next_card_number}")
 
-        #self.total_score += self.round_score
-        
 
     def display_result(self):
 
